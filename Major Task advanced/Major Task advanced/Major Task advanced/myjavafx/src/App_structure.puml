@@ -1,0 +1,274 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "App",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1478241800 { 
+   	label=Librarian
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Librarian1478241800[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Librarian</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1830861979 { 
+   	label=Library
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Library1830861979[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Library</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   books: ArrayList&lt;Book&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   librarians: ArrayList&lt;Librarian&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   readers: ArrayList&lt;Reader&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   users: ArrayList&lt;User&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Block(reader: Reader): Book</TD></TR>
+<TR><TD ALIGN="LEFT" >+ BookRemoval(Title: String, isbn: String, books: ArrayList&lt;Book&gt;): Book</TD></TR>
+<TR><TD ALIGN="LEFT" >+ CompareDataFields(DATA: String, users: ArrayList&lt;User&gt;): Boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ CompareDataFieldsPassword(DATA: String, users: ArrayList&lt;User&gt;): Boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ EmailCheck(Email: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SearchBook(Serial: String, books: ArrayList&lt;Book&gt;): Book</TD></TR>
+<TR><TD ALIGN="LEFT" >+ SearchU(ID: String, users: ArrayList&lt;User&gt;): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserType(id: String, password: String, users: ArrayList&lt;User&gt;): User</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1851112221 { 
+   	label=Reader
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Reader1851112221[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Reader</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   orderList: ArrayList&lt;Book&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addToOrderList(book: Book)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2076425 { 
+   	label=Book
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Book2076425[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Book</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   Author: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   Rentdate: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   Serial: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   date: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   is_available: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   title: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Is_available(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2645995 { 
+   	label=User
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   User2645995[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)User</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   address: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cellPhone: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   email: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   firstName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   id: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isBlocked: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   password: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   type: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_66049 { 
+   	label=App
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   App66049[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)App</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   idField: TextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   idLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   iteration: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   library: Library [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   loginButton: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   loginLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   loginScene: Scene [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   messageLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   passwordField: PasswordField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   passwordLabel: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   root: BorderPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stage: Stage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- ShowAddUser(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ShowOrderList(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ShowRemoveUserScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ShowRentBookScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ShowSearchBook(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >- showAddBookScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showBlockUserScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showBook(book: Book, user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showBookScroll(user: User, book: Book, Change: Book, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showLibrarianDashboard(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showReaderDashboard(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showRemoveBookScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showSearchUserScene(user: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showUser(user: User, SearchingUser: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showUserScroll(user: User, Change: User, users: ArrayList&lt;User&gt;, readers: ArrayList&lt;Reader&gt;, books: ArrayList&lt;Book&gt;, librarians: ArrayList&lt;Librarian&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(primaryStage: Stage)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+App66049 -> Library1830861979[label="library
+[0..1]"];
+App66049 -> Reader1851112221[label="ShowRentBookScene() -> addToOrderList()"];
+Library1830861979 -> Book2076425[label="books
+[0..*]"];
+Library1830861979 -> Librarian1478241800[label="librarians
+[0..*]"];
+Library1830861979 -> Reader1851112221[label="readers
+[0..*]"];
+Library1830861979 -> User2645995[label="users
+[0..*]"];
+Reader1851112221 -> Book2076425[label="orderList
+[0..*]"];
+User2645995 -> Librarian1478241800[arrowhead=none, arrowtail=empty, dir=both];
+User2645995 -> Reader1851112221[arrowhead=none, arrowtail=empty, dir=both];
+    
+}
+@enduml
